@@ -1,16 +1,17 @@
 import React from 'react'
 import './navbar.scss'
+import { Link } from 'react-router-dom'
 
 export function Navbar() {
 	return (
 		<nav>
 			<div className="nav-wrapper navbar green">
-				<a href="/" className="brand-logo">
+				<Link to="/" className="brand-logo">
 					Qize
-				</a>
+				</Link>
 				<ul id="nav-mobile" className="right hide-on-med-and-down">
 					<li>
-						<a href="/">Войти</a>
+						<Link to="/login">Войти</Link>
 					</li>
 				</ul>
 			</div>
