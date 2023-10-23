@@ -11,11 +11,21 @@ export function AuthPage() {
 					<form className="form form-login">
 						<div className="row">
 							<div className="input-field col s12">
-								<input type="text" name="login" className="validate" />
+								<input
+									id="login"
+									type="text"
+									name="login"
+									className="validate"
+								/>
 								<label htmlFor="login">Login</label>
 							</div>
 							<div className="input-field col s12">
-								<input type="password" name="password" className="validate" />
+								<input
+									id="password"
+									type="password"
+									name="password"
+									className="validate"
+								/>
 								<label htmlFor="password">Password</label>
 							</div>
 						</div>
