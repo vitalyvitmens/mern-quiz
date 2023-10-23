@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './auth-page.scss'
+import './registration-page.scss'
 
-export function AuthPage() {
+export function RegistrationPage() {
 	return (
 		<>
 			<div className="container">
-				<div className="auth-page">
-					<h3>Авторизация</h3>
+				<div className="registration-page">
+					<h3>Регистрация</h3>
 					<form className="form form-login">
 						<div className="row">
 							<div className="input-field col s12">
@@ -21,11 +21,11 @@ export function AuthPage() {
 						</div>
 						<div className="row">
 							<button className="wawes-effect wawes-light btn green">
-								Войти
+								Регистрация
 							</button>
 
-							<Link to="/register" className="btn-outline btn-log">
-								Нет аккаунта ?
+							<Link to="/login" className="btn-outline btn-reg">
+								Уже есть аккаунт ?
 							</Link>
 						</div>
 					</form>

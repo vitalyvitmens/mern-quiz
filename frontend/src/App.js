@@ -1,12 +1,16 @@
+import { Routes, Route } from 'react-router-dom'
 import './App.scss'
 import { Navbar } from './components'
-import { AuthPage } from './pages'
+import { AuthPage, RegistrationPage } from './pages'
 
 export const App = () => {
 	return (
 		<div className="app">
 			<Navbar />
-			<AuthPage />
+			<Routes>
+				<Route path="/login" element={<AuthPage />} />
+				<Route path="/register" element={<RegistrationPage />} />
+			</Routes>
 		</div>
 	)
 }

@@ -16,6 +16,7 @@ const UserSchema = mongoose.Schema(
 			type: Number,
 			default: roles.USER,
 		},
+		quzes: [{ type: mongoose.Types.ObjectId, ref: 'Quize' }],
 	},
 	{ timestamps: true }
 )
