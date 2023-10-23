@@ -29,127 +29,130 @@ const mapComment = require('./helpers/mapComment')
 const PORT = process.env.PORT || 3001
 const app = express()
 
-app.use(express.static('../frontend/build'))
+// app.use(express.static('../frontend/build'))
 
-app.use(cookieParser())
-app.use(express.json())
+// app.use(cookieParser())
+// app.use(express.json())
 
-app.post('/register', async (req, res) => {
-	try {
-		const { user, token } = await register(req.body.login, req.body.password)
+app.use(express.json({ extended: true }))
+app.use('/api/auth', require('./routes/auth.route'))
 
-		res
-			.cookie('token', token, { httpOnly: true })
-			.send({ error: null, user: mapUser(user) })
-	} catch (e) {
-		res.send({ error: e.message || 'Unknown error' })
-	}
-})
+// app.post('/register', async (req, res) => {
+// 	try {
+// 		const { user, token } = await register(req.body.login, req.body.password)
 
-app.post('/login', async (req, res) => {
-	try {
-		const { user, token } = await login(req.body.login, req.body.password)
+// 		res
+// 			.cookie('token', token, { httpOnly: true })
+// 			.send({ error: null, user: mapUser(user) })
+// 	} catch (e) {
+// 		res.send({ error: e.message || 'Unknown error' })
+// 	}
+// })
 
-		res
-			.cookie('token', token, { httpOnly: true })
-			.send({ error: null, user: mapUser(user) })
-	} catch (e) {
-		res.send({ error: e.message || 'Unknown error' })
-	}
-})
+// app.post('/login', async (req, res) => {
+// 	try {
+// 		const { user, token } = await login(req.body.login, req.body.password)
 
-app.post('/logout', (req, res) => {
-	res.cookie('token', '', { httpOnly: true }).send({})
-})
+// 		res
+// 			.cookie('token', token, { httpOnly: true })
+// 			.send({ error: null, user: mapUser(user) })
+// 	} catch (e) {
+// 		res.send({ error: e.message || 'Unknown error' })
+// 	}
+// })
 
-app.get('/posts', async (req, res) => {
-	const { posts, lastPage } = await getPosts(
-		req.query.search,
-		req.query.limit,
-		req.query.page
-	)
+// app.post('/logout', (req, res) => {
+// 	res.cookie('token', '', { httpOnly: true }).send({})
+// })
 
-	res.send({ data: { lastPage, posts: posts.map(mapPost) } })
-})
+// app.get('/posts', async (req, res) => {
+// 	const { posts, lastPage } = await getPosts(
+// 		req.query.search,
+// 		req.query.limit,
+// 		req.query.page
+// 	)
 
-app.get('/posts/:id', async (req, res) => {
-	const post = await getPost(req.params.id)
+// 	res.send({ data: { lastPage, posts: posts.map(mapPost) } })
+// })
 
-	res.send({ data: mapPost(post) })
-})
+// app.get('/posts/:id', async (req, res) => {
+// 	const post = await getPost(req.params.id)
 
-app.use(authenticated)
+// 	res.send({ data: mapPost(post) })
+// })
 
-app.post('/posts/:id/comments', async (req, res) => {
-	const newComment = await addComment(req.params.id, {
-		content: req.body.content,
-		author: req.user.id,
-	})
+// app.use(authenticated)
 
-	res.send({ data: mapComment(newComment) })
-})
+// app.post('/posts/:id/comments', async (req, res) => {
+// 	const newComment = await addComment(req.params.id, {
+// 		content: req.body.content,
+// 		author: req.user.id,
+// 	})
 
-app.delete(
-	'/posts/:postId/comments/:commentId',
-	hasRole([ROLES.ADMIN, ROLES.MODERATOR]),
-	async (req, res) => {
-		await deleteComment(req.params.postId, req.params.commentId)
+// 	res.send({ data: mapComment(newComment) })
+// })
 
-		res.send({ error: null })
-	}
-)
+// app.delete(
+// 	'/posts/:postId/comments/:commentId',
+// 	hasRole([ROLES.ADMIN, ROLES.MODERATOR]),
+// 	async (req, res) => {
+// 		await deleteComment(req.params.postId, req.params.commentId)
 
-app.post('/posts', hasRole([ROLES.ADMIN]), async (req, res) => {
-	const newPost = await addPost({
-		title: req.body.title,
-		content: req.body.content,
-		image: req.body.imageUrl,
-	})
+// 		res.send({ error: null })
+// 	}
+// )
 
-	res.send({ data: mapPost(newPost) })
-})
+// app.post('/posts', hasRole([ROLES.ADMIN]), async (req, res) => {
+// 	const newPost = await addPost({
+// 		title: req.body.title,
+// 		content: req.body.content,
+// 		image: req.body.imageUrl,
+// 	})
 
-app.patch('/posts/:id', hasRole([ROLES.ADMIN]), async (req, res) => {
-	const updatedPost = await editPost(req.params.id, {
-		title: req.body.title,
-		content: req.body.content,
-		image: req.body.imageUrl,
-	})
+// 	res.send({ data: mapPost(newPost) })
+// })
 
-	res.send({ data: mapPost(updatedPost) })
-})
+// app.patch('/posts/:id', hasRole([ROLES.ADMIN]), async (req, res) => {
+// 	const updatedPost = await editPost(req.params.id, {
+// 		title: req.body.title,
+// 		content: req.body.content,
+// 		image: req.body.imageUrl,
+// 	})
 
-app.delete('/posts/:id', hasRole([ROLES.ADMIN]), async (req, res) => {
-	await deletePost(req.params.id)
+// 	res.send({ data: mapPost(updatedPost) })
+// })
 
-	res.send({ error: null })
-})
+// app.delete('/posts/:id', hasRole([ROLES.ADMIN]), async (req, res) => {
+// 	await deletePost(req.params.id)
 
-app.get('/users', hasRole([ROLES.ADMIN]), async (req, res) => {
-	const users = await getUsers()
+// 	res.send({ error: null })
+// })
 
-	res.send({ data: users.map(mapUser) })
-})
+// app.get('/users', hasRole([ROLES.ADMIN]), async (req, res) => {
+// 	const users = await getUsers()
 
-app.get('/users/roles', hasRole([ROLES.ADMIN]), async (req, res) => {
-	const roles = getRoles()
+// 	res.send({ data: users.map(mapUser) })
+// })
 
-	res.send({ data: roles })
-})
+// app.get('/users/roles', hasRole([ROLES.ADMIN]), async (req, res) => {
+// 	const roles = getRoles()
 
-app.patch('/users/:id', hasRole([ROLES.ADMIN]), async (req, res) => {
-	const newUser = await updateUser(req.params.id, {
-		role: req.body.roleId,
-	})
+// 	res.send({ data: roles })
+// })
 
-	res.send({ data: mapUser(newUser) })
-})
+// app.patch('/users/:id', hasRole([ROLES.ADMIN]), async (req, res) => {
+// 	const newUser = await updateUser(req.params.id, {
+// 		role: req.body.roleId,
+// 	})
 
-app.delete('/users/:id', hasRole([ROLES.ADMIN]), async (req, res) => {
-	await deleteUser(req.params.id)
+// 	res.send({ data: mapUser(newUser) })
+// })
 
-	res.send({ error: null })
-})
+// app.delete('/users/:id', hasRole([ROLES.ADMIN]), async (req, res) => {
+// 	await deleteUser(req.params.id)
+
+// 	res.send({ error: null })
+// })
 
 mongoose.connect(process.env.DB_CONNECTION_STRING).then(() => {
 	app.listen(PORT, () => {

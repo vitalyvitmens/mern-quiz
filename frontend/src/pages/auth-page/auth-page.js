@@ -2,13 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './auth-page.scss'
 
-export function AuthPage() {
+export function AuthPage({ changeHandler, registerHandler }) {
 	return (
 		<>
 			<div className="container">
 				<div className="auth-page">
 					<h3>Авторизация</h3>
-					<form className="form form-login">
+					<form
+						className="form form-login"
+						onSubmit={(e) => e.preventDefault()}
+					>
 						<div className="row">
 							<div className="input-field col s12">
 								<input
@@ -16,6 +19,7 @@ export function AuthPage() {
 									type="text"
 									name="login"
 									className="validate"
+									onChange={changeHandler}
 								/>
 								<label htmlFor="login">Login</label>
 							</div>
@@ -25,12 +29,16 @@ export function AuthPage() {
 									type="password"
 									name="password"
 									className="validate"
+									onChange={changeHandler}
 								/>
 								<label htmlFor="password">Password</label>
 							</div>
 						</div>
 						<div className="row">
-							<button className="wawes-effect wawes-light btn green">
+							<button
+								className="wawes-effect wawes-light btn green"
+								onClick={registerHandler}
+							>
 								Войти
 							</button>
 
