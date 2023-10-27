@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './registration-page.scss'
 
-export function RegistrationPage({ changeHandler, registerHandler }) {
+export const RegistrationPage = ({ changeHandler, registerHandler }) => {
 	return (
 		<>
 			<div className="container">

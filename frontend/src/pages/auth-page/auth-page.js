@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './auth-page.scss'
 
-export function AuthPage({ changeHandler, registerHandler }) {
+export const AuthPage = ({ changeHandler, registerHandler }) => {
 	return (
 		<>
 			<div className="container">
