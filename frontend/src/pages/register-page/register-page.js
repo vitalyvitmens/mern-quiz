@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
-import './auth-page.scss'
+import './register-page.scss'
 
-export const AuthPage = ({ changeHandler, loginHandler }) => {
+export const RegisterPage = ({ changeHandler, registerHandler }) => {
 	return (
 		<div className="container">
-			<div className="auth-page">
-				<h3>Авторизация</h3>
+			<div className="register-page">
+				<h3>Регистрация</h3>
 				<form className="form form-login" onSubmit={(e) => e.preventDefault()}>
 					<div className="row">
 						<div className="input-field col s12">
@@ -32,13 +32,13 @@ export const AuthPage = ({ changeHandler, loginHandler }) => {
 					<div className="row">
 						<button
 							className="wawes-effect wawes-light btn green"
-							onClick={loginHandler}
+							onClick={registerHandler}
 						>
-							Войти
+							Регистрация
 						</button>
 
-						<Link to="/register" className="btn-outline btn-log">
-							Нет аккаунта ?
+						<Link to="/login" className="btn-outline btn-reg">
+							Уже есть аккаунт ?
 						</Link>
 					</div>
 				</form>
