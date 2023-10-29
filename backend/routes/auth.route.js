@@ -90,7 +90,7 @@ router.post(
 				return res.status(400).json({ message: 'Пароли не совпадают' })
 			}
 
-			const token = jwt.sign({ userId: user.id }, JWT_SECRET, {
+			const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
 				expiresIn: '30d',
 			})
 
