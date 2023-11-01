@@ -22,7 +22,7 @@ export function Navbar() {
 				) : (
 					<ul id="nav-mobile" className="right hide-on-med-and-down">
 						<li>
-							<Link to="/">Войти</Link>
+							<Link to="/login">Войти</Link>
 						</li>
 					</ul>
 				)}
