@@ -14,7 +14,7 @@ export function Navbar() {
 				{isLogin ? (
 					<ul id="nav-mobile" className="right hide-on-med-and-down">
 						<li>
-							<Link to="/" onClick={logout}>
+							<Link to="/login" onClick={logout}>
 								Выйти
 							</Link>
 						</li>

@@ -37,43 +37,43 @@ const app = express()
 app.use(express.json({ extended: true }))
 app.use('/api/auth', require('./routes/auth.route'))
 
-// app.post('/register', async (req, res) => {
-// 	try {
-// 		const { user, token } = await register(req.body.login, req.body.password)
+app.post('/register', async (req, res) => {
+	try {
+		const { user, token } = await register(req.body.login, req.body.password)
 
-// 		res
-// 			.cookie('token', token, { httpOnly: true })
-// 			.send({ error: null, user: mapUser(user) })
-// 	} catch (e) {
-// 		res.send({ error: e.message || 'Unknown error' })
-// 	}
-// })
+		res
+			.cookie('token', token, { httpOnly: true })
+			.send({ error: null, user: mapUser(user) })
+	} catch (e) {
+		res.send({ error: e.message || 'Unknown error' })
+	}
+})
 
-// app.post('/login', async (req, res) => {
-// 	try {
-// 		const { user, token } = await login(req.body.login, req.body.password)
+app.post('/login', async (req, res) => {
+	try {
+		const { user, token } = await login(req.body.login, req.body.password)
 
-// 		res
-// 			.cookie('token', token, { httpOnly: true })
-// 			.send({ error: null, user: mapUser(user) })
-// 	} catch (e) {
-// 		res.send({ error: e.message || 'Unknown error' })
-// 	}
-// })
+		res
+			.cookie('token', token, { httpOnly: true })
+			.send({ error: null, user: mapUser(user) })
+	} catch (e) {
+		res.send({ error: e.message || 'Unknown error' })
+	}
+})
 
-// app.post('/logout', (req, res) => {
-// 	res.cookie('token', '', { httpOnly: true }).send({})
-// })
+app.post('/logout', (req, res) => {
+	res.cookie('token', '', { httpOnly: true }).send({})
+})
 
-// app.get('/posts', async (req, res) => {
-// 	const { posts, lastPage } = await getPosts(
-// 		req.query.search,
-// 		req.query.limit,
-// 		req.query.page
-// 	)
+app.get('/posts', async (req, res) => {
+	const { posts, lastPage } = await getPosts(
+		req.query.search,
+		req.query.limit,
+		req.query.page
+	)
 
-// 	res.send({ data: { lastPage, posts: posts.map(mapPost) } })
-// })
+	res.send({ data: { lastPage, posts: posts.map(mapPost) } })
+})
 
 // app.get('/posts/:id', async (req, res) => {
 // 	const post = await getPost(req.params.id)

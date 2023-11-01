@@ -18,7 +18,7 @@ export const userRoutes = (isLogin) => {
 		<Routes>
 			<React.Fragment>
 				<Route path="/login" element={AuthPage} />
-				<Link to="/login" />
+				<Link to="/" />
 			</React.Fragment>
 		</Routes>
 	)

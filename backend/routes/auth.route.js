@@ -87,7 +87,7 @@ router.post(
 			const isPasswordMatch = await bcrypt.compare(password, user.password)
 
 			if (!isPasswordMatch) {
-				return res.status(400).json({ message: 'Пароли не совпадают' })
+				return res.status(400).json({ message: 'Не верный пароль' })
 			}
 
 			const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
