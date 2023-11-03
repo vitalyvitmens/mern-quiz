@@ -26,7 +26,7 @@ const mapPost = require('./helpers/mapPost')
 const { addComment, deleteComment } = require('./controllers/comment')
 const mapComment = require('./helpers/mapComment')
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 4001
 const app = express()
 
 // app.use(express.static('../frontend/build'))
@@ -61,9 +61,9 @@ app.post('/login', async (req, res) => {
 	}
 })
 
-app.post('/logout', (req, res) => {
-	res.cookie('token', '', { httpOnly: true }).send({})
-})
+// app.post('/logout', (req, res) => {
+// 	res.cookie('token', '', { httpOnly: true }).send({})
+// })
 
 app.get('/posts', async (req, res) => {
 	const { posts, lastPage } = await getPosts(

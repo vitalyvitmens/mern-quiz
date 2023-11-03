@@ -28,9 +28,9 @@ router.post(
 			}
 			const { login, password } = req.body
 
-			const isUsed = await User.findOne({ login })
+			const isUser = await User.findOne({ login })
 
-			if (isUsed) {
+			if (isUser) {
 				return res.status(300).json({
 					message: `Пользователь с логином: ${login} уже есть в базе, если это Вы, то пробуйте авторизоваться, иначе используйте другой логин для регистрации`,
 				})
@@ -45,9 +45,15 @@ router.post(
 
 			await user.save()
 
-			res
-				.status(201)
-				.json({ message: `Пользователь с логином: ${login} создан` })
+			const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+				expiresIn: '30d',
+			})
+
+			res.status(201).json({
+				token,
+				userId: user.id,
+				message: `Пользователь с логином: ${login} создан`,
+			})
 		} catch (error) {
 			console.log(error)
 		}
@@ -94,7 +100,11 @@ router.post(
 				expiresIn: '30d',
 			})
 
-			res.json({ token, userId: user.id })
+			res.json({
+				token,
+				userId: user.id,
+				message: `Пользователь с логином: ${login} авторизовался`,
+			})
 		} catch (error) {
 			console.log(error)
 		}

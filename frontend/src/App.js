@@ -36,7 +36,7 @@ export const App = () => {
 						},
 					}
 				)
-				.then((response) => console.log(response))
+				.then((response) => login(response.data.token, response.data.userId))
 		} catch (error) {
 			console.log(error)
 		}
