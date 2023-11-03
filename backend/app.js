@@ -65,15 +65,15 @@ app.post('/login', async (req, res) => {
 // 	res.cookie('token', '', { httpOnly: true }).send({})
 // })
 
-app.get('/posts', async (req, res) => {
-	const { posts, lastPage } = await getPosts(
-		req.query.search,
-		req.query.limit,
-		req.query.page
-	)
+// app.get('/posts', async (req, res) => {
+// 	const { posts, lastPage } = await getPosts(
+// 		req.query.search,
+// 		req.query.limit,
+// 		req.query.page
+// 	)
 
-	res.send({ data: { lastPage, posts: posts.map(mapPost) } })
-})
+// 	res.send({ data: { lastPage, posts: posts.map(mapPost) } })
+// })
 
 // app.get('/posts/:id', async (req, res) => {
 // 	const post = await getPost(req.params.id)
@@ -81,7 +81,7 @@ app.get('/posts', async (req, res) => {
 // 	res.send({ data: mapPost(post) })
 // })
 
-// app.use(authenticated)
+app.use(authenticated)
 
 // app.post('/posts/:id/comments', async (req, res) => {
 // 	const newComment = await addComment(req.params.id, {

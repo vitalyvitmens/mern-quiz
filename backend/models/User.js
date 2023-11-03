@@ -12,10 +12,10 @@ const UserSchema = mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		// role: {
-		// 	type: Number,
-		// 	default: roles.USER,
-		// },
+		role: {
+			type: Number,
+			default: roles.USER,
+		},
 		qizes: [{ type: mongoose.Types.ObjectId, ref: 'Qize' }],
 	},
 	{ timestamps: true }
