@@ -74,6 +74,7 @@ export const App = () => {
 							<AuthPage
 								changeHandler={changeHandler}
 								loginHandler={loginHandler}
+								form={form}
 							/>
 						}
 					/>
@@ -83,6 +84,7 @@ export const App = () => {
 							<RegisterPage
 								changeHandler={changeHandler}
 								registerHandler={registerHandler}
+								form={form}
 							/>
 						}
 					/>

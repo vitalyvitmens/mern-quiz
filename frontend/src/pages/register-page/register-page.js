@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import './register-page.scss'
 
-export const RegisterPage = ({ changeHandler, registerHandler }) => {
+export const RegisterPage = ({ changeHandler, registerHandler, form }) => {
 	return (
 		<div className="container">
 			<div className="register-page">
@@ -31,6 +31,7 @@ export const RegisterPage = ({ changeHandler, registerHandler }) => {
 					</div>
 					<div className="row">
 						<button
+							disabled={!form.login || !form.password}
 							className="wawes-effect wawes-light btn green"
 							onClick={registerHandler}
 						>

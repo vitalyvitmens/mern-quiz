@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import './auth-page.scss'
 
-export const AuthPage = ({ changeHandler, loginHandler }) => {
+export const AuthPage = ({ changeHandler, loginHandler, form }) => {
 	return (
 		<div className="container">
 			<div className="auth-page">
@@ -31,6 +31,7 @@ export const AuthPage = ({ changeHandler, loginHandler }) => {
 					</div>
 					<div className="row">
 						<button
+							disabled={!form.login || !form.password}
 							className="wawes-effect wawes-light btn green"
 							onClick={loginHandler}
 						>
