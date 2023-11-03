@@ -3,7 +3,7 @@ const User = require('../models/User');
 const { generate } = require('../helpers/token');
 const ROLES = require('../constants/roles')
 
-// register
+// register user
 
 async function register(login, password) {
     if (!password) {
@@ -18,7 +18,7 @@ async function register(login, password) {
     return { user, token };
 }
 
-// login
+// login user
 
 async function login(login, password) {
     const user = await User.findOne({ login });
@@ -38,9 +38,13 @@ async function login(login, password) {
     return { token, user };
 }
 
+// get users
+
 function getUsers() {
     return User.find();
 }
+
+// get roles
 
 function getRoles() {
     return [

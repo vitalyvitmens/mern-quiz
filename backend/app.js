@@ -37,6 +37,10 @@ const app = express()
 app.use(express.json({ extended: true }))
 app.use('/api/auth', require('./routes/auth.route'))
 
+// app.get('/get', async (req, res) => {
+//   return res.json({message: '/get response'})
+// })
+
 app.post('/register', async (req, res) => {
 	try {
 		const { user, token } = await register(req.body.login, req.body.password)

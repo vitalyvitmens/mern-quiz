@@ -5,6 +5,8 @@ const { check, validationResult } = require('express-validator')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+// register
+
 router.post(
 	'/register',
 	[
@@ -28,9 +30,9 @@ router.post(
 			}
 			const { login, password } = req.body
 
-			const isUser = await User.findOne({ login })
+			const isUsed = await User.findOne({ login })
 
-			if (isUser) {
+			if (isUsed) {
 				return res.status(300).json({
 					message: `Пользователь с логином: ${login} уже есть в базе, если это Вы, то пробуйте авторизоваться, иначе используйте другой логин для регистрации`,
 				})
@@ -59,6 +61,8 @@ router.post(
 		}
 	}
 )
+
+// login
 
 router.post(
 	'/login',
