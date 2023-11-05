@@ -39,7 +39,7 @@ export const App = () => {
 				.then((response) => login(response.data.token, response.data.userId))
 		} catch (error) {
 			console.log(error)
-		}
+		} 
 	}
 
 	const loginHandler = async () => {
